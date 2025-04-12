@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Engineering Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #0055aa;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav button {
+      background: none;
+      border: none;
+      padding: 1rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background-color: #003366;
+    }
+    .service-section {
+      padding: 2rem;
+      border-bottom: 1px solid #ddd;
+      display: none;
+    }
+    .service-section.active {
+      display: block;
+    }
+    .order-form {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 1rem auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .order-form input, .order-form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .order-form button {
+      background-color: #0055aa;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      width: 100%;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .order-form button:hover {
+      background-color: #003366;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Engineering Services at Your Doorstep</h1>
+    <p>Reliable. Professional. On-Demand.</p>
+  </header>
+
+  <nav>
+    <button onclick="showService('electrician')">Electrician</button>
+    <button onclick="showService('solar')">Solar Panels</button>
+    <button onclick="showService('water')">Water Systems</button>
+    <button onclick="showService('plumber')">Plumber</button>
+    <button onclick="showService('carpenter')">Carpenter</button>
+    <button onclick="showService('builder')">Builder</button>
+    <button onclick="showService('handyman')">Handyman</button>
+  </nav>
+
+  <div id="electrician" class="service-section">
+    <h2>Electrician Services</h2>
+    <p>Expert electrical installations, repairs and upgrades for your home.</p>
+    <button onclick="openOrderForm('Electrician Services', '100')">Order Now</button>
+  </div>
+  <div id="solar" class="service-section">
+    <h2>Solar Panel Installation</h2>
+    <p>Eco-friendly solar solutions tailored for your roof.</p>
+    <button onclick="openOrderForm('Solar Panel Installation', '800')">Order Now</button>
+  </div>
+  <div id="water" class="service-section">
+    <h2>Water Management Systems</h2>
+    <p>Smart solutions for water conservation and management.</p>
+    <button onclick="openOrderForm('Water Management Systems', '500')">Order Now</button>
+  </div>
+  <div id="plumber" class="service-section">
+    <h2>Plumber Services</h2>
+    <p>Drips and leaks beware — our plumbers are near!</p>
+    <button onclick="openOrderForm('Plumber Services', '120')">Order Now</button>
+  </div>
+  <div id="carpenter" class="service-section">
+    <h2>Carpenter Services</h2>
+    <p>Custom woodwork and furniture fixes with finesse.</p>
+    <button onclick="openOrderForm('Carpenter Services', '150')">Order Now</button>
+  </div>
+  <div id="builder" class="service-section">
+    <h2>Builder Services</h2>
+    <p>Structural repairs and home improvements by pros.</p>
+    <button onclick="openOrderForm('Builder Services', '1000')">Order Now</button>
+  </div>
+  <div id="handyman" class="service-section">
+    <h2>Handyman Services</h2>
+    <p>All the little things, done brilliantly.</p>
+    <button onclick="openOrderForm('Handyman Services', '90')">Order Now</button>
+  </div>
+
+  <div class="order-form" id="orderForm" style="display:none">
+    <h3>Checkout</h3>
+    <form onsubmit="submitOrder(event)">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="text" id="city" placeholder="City" required />
+      <input type="text" id="address" placeholder="Address" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <input type="text" id="service" readonly />
+      <input type="text" id="price" readonly />
+      <textarea id="shipping" placeholder="Installation Details" required></textarea>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    function showService(serviceId) {
+      document.querySelectorAll('.service-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(serviceId).classList.add('active');
+    }
+
+    function openOrderForm(service, price) {
+      document.getElementById('service').value = service;
+      document.getElementById('price').value = `£${price}`;
+      document.getElementById('orderForm').style.display = 'block';
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const city = document.getElementById('city').value;
+      const address = document.getElementById('address').value;
+      const phone = document.getElementById('phone').value;
+      const service = document.getElementById('service').value;
+      const price = document.getElementById('price').value;
+      const shipping = document.getElementById('shipping').value;
+      alert(`Thank you, ${name}! Your ${service} order has been placed.`);
+      document.querySelector('form').reset();
+      document.getElementById('orderForm').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
